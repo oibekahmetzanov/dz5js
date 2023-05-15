@@ -220,10 +220,39 @@ let user = [{
 	}
 }]
 
+let status = "All"
+
+
 let row = document.querySelector('.row')
 
+let menuItems = document.querySelectorAll('.menu-item')
+
+
 const addUserRow = () => {
-    user.forEach((item) => {
+
+Array.from(menuItems).forEach((item) => {
+	item.style.color = 'black'
+	if(item.textContent === status){
+		item.style.color = 'red'
+	}
+    item.addEventListener('click', () => {
+		status = item.textContent
+		console.log(status);
+		addUserRow()
+	})
+    })
+
+row.innerHTML = '';
+
+
+
+    user.filter((item) => {
+		// return item.category === status
+		if(status !== "All") {
+			return item.category === status
+		}
+		return item
+	}).forEach((item) => {
         
         let card = document.createElement('div')
         let title = document.createElement('h2')
